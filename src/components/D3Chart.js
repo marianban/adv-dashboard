@@ -23,11 +23,13 @@ export class D3Chart {
   initGenerators() {
     const lineGeneratorClicks = d3
       .line()
+      .defined(d => !isNaN(this.yAccessorClicks(d)))
       .x(d => this.xScale(this.xAccessor(d)))
       .y(d => this.yScaleClicks(this.yAccessorClicks(d)));
 
     const lineGeneratorImpressions = d3
       .line()
+      .defined(d => !isNaN(this.yAccessorImpressions(d)))
       .x(d => this.xScale(this.xAccessor(d)))
       .y(d => this.yScaleImpressions(this.yAccessorImpressions(d)));
 
