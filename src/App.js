@@ -16,7 +16,7 @@ function App() {
   });
   const { dataSources, campaigns } = state;
   const dataSourceOptions = useDataSourceOptions(data);
-  const campaignOptions = useCampaignOptions(data, dataSources);
+  const campaignOptions = useCampaignOptions(data);
   const filteredValues = useFilteredData(dataSources, campaigns, data);
   const handleOnApply = model => {
     setState(model);

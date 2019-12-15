@@ -33,6 +33,7 @@ export const Sidebar = ({
       <Label>
         Data Source
         <Select
+          className="select"
           name="dataSources"
           placeholder="All"
           options={dataSourceOptions}
@@ -44,6 +45,7 @@ export const Sidebar = ({
       <Label>
         Campaign
         <Select
+          className="select"
           name="campaigns"
           placeholder="All"
           options={campaignOptions}

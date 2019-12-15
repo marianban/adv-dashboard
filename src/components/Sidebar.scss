@@ -17,4 +17,10 @@
     margin-top: 2rem;
     width: 100%;
   }
+
+  .select {
+    & > div {
+      width: 36rem;
+    }
+  }
 }
