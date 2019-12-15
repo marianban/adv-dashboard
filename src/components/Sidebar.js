@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Select, { createFilter } from 'react-select';
 import { useDataSourceOptions } from '../hooks/useDataSourceOptions';
 import { useCampaignOptions } from '../hooks/useCampaignOptions';
+import { Select } from './Select';
 import { Label } from './Label';
 import { Button } from './Button';
 import './Sidebar.scss';
@@ -30,24 +30,20 @@ export const Sidebar = ({ data, onApply }) => {
       <Label>
         Data Source
         <Select
-          className="select"
           name="dataSources"
           placeholder="All"
           options={dataSourceOptions}
           isMulti={true}
-          filterOption={createFilter({ ignoreAccents: false })}
           onChange={handleOnChange}
         />
       </Label>
       <Label>
         Campaign
         <Select
-          className="select"
           name="campaigns"
           placeholder="All"
           options={campaignOptions}
           isMulti={true}
-          filterOption={createFilter({ ignoreAccents: false })}
           onChange={handleOnChange}
         />
       </Label>
