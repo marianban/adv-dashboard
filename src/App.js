@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.scss';
+import { Sidebar } from './components/Sidebar';
+import { Loader } from './components/Loader';
+import { useData } from './hooks/useData';
+import { useDataSourceOptions } from './hooks/useDataSourceOptions';
+import { useCampaignOptions } from './hooks/useCampaignOptions';
+import { useFilteredData } from './hooks/useFilteredData';
+import { Chart } from './components/Chart';
 
 function App() {
+  const { data, isLoading, error } = useData();
+  const [state, setState] = useState({
+    dataSources: [],
+    campaigns: []
+  });
+  const { dataSources, campaigns } = state;
+  const dataSourceOptions = useDataSourceOptions(data);
+  const campaignOptions = useCampaignOptions(data, dataSources);
+  const filteredValues = useFilteredData(dataSources, campaigns, data);
+  const handleOnApply = model => {
+    setState(model);
+  };
+
+  if (error) {
+    return <div>Unexpected error ocurred. Please refresh your page.</div>;
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Sidebar
+        model={state}
+        dataSourceOptions={dataSourceOptions}
+        campaignOptions={campaignOptions}
+        onApply={handleOnApply}
+      />
+      <Chart data={filteredValues} />
     </div>
   );
 }

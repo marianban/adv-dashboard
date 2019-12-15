@@ -1,0 +1,32 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  // 1 rem = 10px 10/16 = 62.5%
+  // default browser font size is 16px
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: Inter UI Regular;
+  src: url(../../fonts/Inter-UI-Regular.ttf);
+}
+
+body {
+  font-family: Inter UI Regular, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  color: $color-grey-dark;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
