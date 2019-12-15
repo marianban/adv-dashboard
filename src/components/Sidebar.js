@@ -1,27 +1,19 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Select, { createFilter } from 'react-select';
 import { Label } from './Label';
 import { Button } from './Button';
 import './Sidebar.scss';
 
-export const Sidebar = ({
-  dataSourceOptions,
-  campaignOptions,
-  model,
-  onApply
-}) => {
+export const Sidebar = ({ dataSourceOptions, campaignOptions, onApply }) => {
   const [state, setState] = useState({
     dataSources: [],
     campaigns: []
   });
 
-  const handleOnChange = useCallback(
-    (options, { name }) => {
-      setState({ ...model, [name]: (options || []).map(o => o.value) });
-    },
-    [model]
-  );
+  const handleOnChange = (options, { name }) => {
+    setState({ ...state, [name]: (options || []).map(o => o.value) });
+  };
 
   const handleOnApply = () => {
     onApply(state);
@@ -69,9 +61,5 @@ const Options = PropTypes.arrayOf(OptionShape);
 Sidebar.propTypes = {
   dataSourceOptions: Options.isRequired,
   campaignOptions: Options.isRequired,
-  onApply: PropTypes.func.isRequired,
-  model: PropTypes.shape({
-    dataSources: PropTypes.array.isRequired,
-    campaigns: PropTypes.array.isRequired
-  })
+  onApply: PropTypes.func.isRequired
 };

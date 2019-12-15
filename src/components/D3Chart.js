@@ -64,6 +64,7 @@ export class D3Chart {
   }
 
   update(dimensions, data = []) {
+    console.log('update', data);
     this.updateBounds(dimensions);
     this.updateScales(dimensions, data);
     this.updateAxis(dimensions);
@@ -116,16 +117,16 @@ export class D3Chart {
     legends.exit().remove();
 
     legends
-      .attr('x', (d, i) => i * 200)
+      .attr('x', (d, i) => i * 150)
       .attr('y', dimensions.boundedHeight + 25);
 
     const svg = legends
       .enter()
       .append('svg')
-      .attr('viewBox', '0 0 200 50')
-      .attr('x', (d, i) => i * 200)
+      .attr('viewBox', '0 0 150 50')
+      .attr('x', (d, i) => i * 150)
       .attr('y', dimensions.boundedHeight + 25)
-      .attr('width', 200)
+      .attr('width', 150)
       .attr('height', 60);
     svg
       .append('rect')

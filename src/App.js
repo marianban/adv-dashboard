@@ -33,7 +33,6 @@ function App() {
   return (
     <div className="app">
       <Sidebar
-        model={state}
         dataSourceOptions={dataSourceOptions}
         campaignOptions={campaignOptions}
         onApply={handleOnApply}
