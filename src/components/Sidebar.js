@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Select, { createFilter } from 'react-select';
+import { useDataSourceOptions } from '../hooks/useDataSourceOptions';
+import { useCampaignOptions } from '../hooks/useCampaignOptions';
 import { Label } from './Label';
 import { Button } from './Button';
 import './Sidebar.scss';
 
-export const Sidebar = ({ dataSourceOptions, campaignOptions, onApply }) => {
+export const Sidebar = ({ data, onApply }) => {
   const [state, setState] = useState({
     dataSources: [],
     campaigns: []
   });
+
+  const dataSourceOptions = useDataSourceOptions(data);
+  const campaignOptions = useCampaignOptions(data, state.dataSources);
 
   const handleOnChange = (options, { name }) => {
     setState({ ...state, [name]: (options || []).map(o => o.value) });
@@ -51,15 +56,7 @@ export const Sidebar = ({ dataSourceOptions, campaignOptions, onApply }) => {
   );
 };
 
-const OptionShape = PropTypes.shape({
-  value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
-});
-
-const Options = PropTypes.arrayOf(OptionShape);
-
 Sidebar.propTypes = {
-  dataSourceOptions: Options.isRequired,
-  campaignOptions: Options.isRequired,
+  data: PropTypes.array.isRequired,
   onApply: PropTypes.func.isRequired
 };

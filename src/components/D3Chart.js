@@ -64,7 +64,6 @@ export class D3Chart {
   }
 
   update(dimensions, data = []) {
-    console.log('update', data);
     this.updateBounds(dimensions);
     this.updateScales(dimensions, data);
     this.updateAxis(dimensions);
